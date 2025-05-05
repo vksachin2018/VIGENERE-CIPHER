@@ -1,36 +1,74 @@
-# VIGENERE-CIPHER
-## EX. NO: 4
- 
+# Cryptography---19CS412-classical-techqniques
+# Caeser Cipher
+Caeser Cipher using with different key values
 
-## IMPLEMETATION OF VIGENERE CIPHER
- 
+# AIM:
+To encrypt and decrypt the given message by using Ceaser Cipher encryption algorithm.
 
-## AIM:
+## DESIGN STEPS:
 
-To implement the Vigenere Cipher substitution technique using C program.
+### Step 1:
 
-## DESCRIPTION:
+Design of Caeser Cipher algorithnm 
 
-To encrypt, a table of alphabets can be used, termed a tabula recta, Vigenère square,or Vigenère table. It consists of the alphabet written out 26 times in differnt rows, each
- 
-alphabet shifted cyclically to the left compared to the previous alphabet, corresponding to the 26 possible Caesar ciphers. At different points in the encryption process, the cipher uses adifferent alphabet from one of the rows. The alphabet used at each point repeating keyword.depends on a Each row starts with a key letter. The remainder of the row holds the letters A to Z. Although there are 26 key rows shown, you will only use as many keys as there are unique letters in the key string, here just 5 keys, {L, E, M, O, N}. For successive letters of the message, we are going to take successive letters of the key string, and encipher each message letter using its corresponding key row. Choose the next letter of the key, go along that row to find the column heading that	atches the message character; the letter at the intersection of
-[key-row, msg-col] is the enciphered letter.
+### Step 2:
 
+Implementation using C or pyhton code
 
-## ALGORITHM:
+### Step 3:
 
-STEP-1: Arrange the alphabets in row and column of a 26*26 matrix.
-STEP-2: Circulate the alphabets in each row to position left such that the first letter is attached to last.
-STEP-3: Repeat this process for all 26 rows and construct the final key matrix.
-STEP-4: The keyword and the plain text is read from the user.
-STEP-5: The characters in the keyword are repeated sequentially so as to match with that of the plain text.
-STEP-6: Pick the first letter of the plain text and that of the keyword as the row indices and column indices respectively.
-STEP-7: The junction character where these two meet forms the cipher character.
-STEP-8: Repeat the above steps to generate the entire cipher text.
+1.	In Ceaser Cipher each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
+2.	For example, with a left shift of 3, D would be replaced by A, E would become B, and so on.
+3.	The encryption can also be represented using modular arithmetic by first transforming the letters into numbers, according to the   
+    scheme, A = 0, B = 1, Z = 25.
+4.	Encryption of a letter x by a shift n can be described mathematically as,
+                       En(x) = (x + n) mod26
+5.	Decryption is performed similarly,
+                       Dn (x)=(x - n) mod26
 
 
-## PROGRAM
+## PROGRAM:
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+void main()
+{
+ char plain[10], cipher[10];
+ int key,i,length;
+ int result;
+ printf("\n Enter the plain text:");
+ scanf("%s", plain);
+ printf("\n Enter the key value:");
+ scanf("%d", &key);
+ printf("\n \n \t PLAIN TEXt: %s",plain);
+ printf("\n \n \t ENCRYPTED TEXT: ");
+ for(i = 0, length = strlen(plain); i < length; i++)
+ {
+ cipher[i]=plain[i] + key;
+if (isupper(plain[i]) && (cipher[i] > 'Z'))
+ cipher[i] = cipher[i] - 26;
+ if (islower(plain[i]) && (cipher[i] > 'z'))
+ cipher[i] = cipher[i] - 26;
+ printf("%c", cipher[i]);
+ }
+ printf("\n \n \t AFTER DECRYPTION : ");
+ for(i=0;i<length;i++)
+ {
+ plain[i]=cipher[i]-key;
+ if(isupper(cipher[i])&&(plain[i]<'A'))
+ plain[i]=plain[i]+26;
+ if(islower(cipher[i])&&(plain[i]<'a'))
+ plain[i]=plain[i]+26;
+ printf("%c",plain[i]);
+ }
+}
+```
 
-## OUTPUT
+## OUTPUT:
+![image](https://github.com/user-attachments/assets/059d3376-80b1-4c50-9cab-9591da1550a8)
 
-## RESULT
+
+## RESULT:
+The program is executed successfully
+
